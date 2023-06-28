@@ -237,4 +237,13 @@ lvmtest@lvmtest:/var/www$ curl -H "Host:tms.by" 127.0.0.1
         <p>Mikhalenka. Web Servers, Part I</p>
     </body>
 </html>
+lvmtest@lvmtest:~$ netstat -tlpn
+(Not all processes could be identified, non-owned process info
+ will not be shown, you would have to be root to see it all.)
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      -                   
+tcp        0      0 0.0.0.0:80              0.0.0.0:*               LISTEN      -                   
+tcp6       0      0 :::22                   :::*                    LISTEN      -                                   
+tcp6       0      0 :::80                   :::*                    LISTEN      -   
 ```
