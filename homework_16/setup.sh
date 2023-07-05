@@ -2,25 +2,31 @@
 
 echo "Update packages"
 sudo apt update
+echo "======================================"
 
 echo "Install Java, unzip, wget"
 sudo apt install default-jdk wget unzip -y
+echo "======================================"
 
 echo "Download Apache JMeter"
 wget https://dlcdn.apache.org//jmeter/binaries/apache-jmeter-5.6.zip
 sudo unzip apache-jmeter-5.6.zip -d /opt/
+echo "======================================"
 
 echo "Add JMeter to user PATH"
 echo '# set JMeter path' | tee -a /home/$SUDO_USER/.profile
 echo "JMETER_HOME=\"/opt/apache-jmeter-5.6\"" | tee -a /home/$SUDO_USER/.profile
 echo "PATH=\"\$JMETER_HOME/bin:\$PATH\"" | tee -a /home/$SUDO_USER/.profile
 source /home/$SUDO_USER/.profile
+echo "======================================"
 
 echo "Show Apache JMeter version"
 jmeter --version
+echo "======================================"
 
 echo "Create directory for testcases"
-mkdir /home/$SUDO_USER/test_cases
+mkdir -p /home/$SUDO_USER/test_cases
+echo "======================================"
 
 echo "Create Apache JMeter test"
 load_test_content='<?xml version="1.0" encoding="UTF-8"?>
@@ -113,9 +119,12 @@ load_test_content='<?xml version="1.0" encoding="UTF-8"?>
 </jmeterTestPlan>'
 
 echo "$load_test_content" > /home/$SUDO_USER/test_cases/load_test.jmx
+echo "======================================"
 
 echo "Run Apache JMeter test"
 JVM_ARGS="-Xms2048m -Xmx2048m" jmeter -n -t /home/$SUDO_USER/test_cases/load_test.jmx -l /home/$SUDO_USER/test_cases/load_test.jtl -H tms.by -P 80
+echo "======================================"
 
 echo "Show results of the test"
 cat /home/$SUDO_USER/test_cases/load_test.jtl
+echo "======================================"
