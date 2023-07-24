@@ -1,5 +1,5 @@
 ```bash
-slava@phobos:~/git-projects/TMS-homework/homework_21$ ansible-playbook -i inventory.yml playbook.yml --ask-become-pass
+ansible@ansible-master:~$ ansible-playbook -i inventory.yml playbook.yml --ask-become-pass
 BECOME password: 
 
 PLAY [Install and configure Nginx] *****************************************************************************************************
