@@ -1,0 +1,115 @@
+---
+- name: Install and configure Nginx
+  hosts: ansible-node1,ansible-node2
+  become: true
+
+  vars:
+    server_name: "www.tms.by"
+    web_root: "/var/www/tms.by/html"
+
+  tasks:
+    - name: Update packages
+      apt:
+        update_cache: yes
+      tags: update
+
+    - name: Install nginx, curl, net-tools
+      apt:
+        name: "{{ item }}"
+        state: present
+      with_items:
+        - nginx
+        - curl
+        - net-tools
+      tags: install
+
+    - name: Create tms.by site directory
+      file:
+        path: /var/www/tms.by/html
+        state: directory
+        owner: www-data
+        group: www-data
+
+    - name: Create file index.html for site tms.by
+      copy:
+        dest: /var/www/tms.by/html/index.html
+        content: |
+          <html>
+              <head>
+                  <title>Mikhalenka. Web Servers. Part I</title>
+              </head>
+              <body>
+                  <p>Mikhalenka. Web Servers, Part I</p>
+              </body>
+          </html>
+        owner: www-data
+        group: www-data
+        mode: '0644'
+
+    - name: Create Nginx config for site tms.by
+      copy:
+        dest: /etc/nginx/sites-available/tms.by
+        content: |
+          server {
+              listen       80;
+              server_name  www.tms.by;
+
+              location / {
+                  root   /var/www/tms.by/html;
+                  index  index.html index.htm;
+              }
+          }
+        owner: root
+        group: root
+        mode: '0644'
+
+    - name: Create symlink
+      file:
+        src: /etc/nginx/sites-available/tms.by
+        dest: /etc/nginx/sites-enabled/tms.by
+        state: link
+      tags: setup
+
+    - name: Add current user to www-data group
+      user:
+        name: "{{ ansible_user }}"
+        groups: www-data
+        append: yes
+      tags: setup
+
+    - name: Set proper permissions to /var/www directory
+      file:
+        path: /var/www
+        owner: www-data
+        group: www-data
+        recurse: yes
+      tags: setup
+
+    - name: Restart Nginx
+      service:
+        name: nginx
+        state: restarted
+      tags: setup
+
+    - name: Add tms.by in hosts
+      lineinfile:
+        path: /etc/hosts
+        line: "127.0.0.1 tms.by www.tms.by"
+      tags: setup
+
+    - name: Check if site works
+      shell: "curl -H 'Host:{{ server_name }}' 127.0.0.1"
+      register: curl_output
+      ignore_errors: yes
+
+    - debug:
+        var: curl_output.stdout_lines
+      when: curl_output is success
+
+    - debug:
+        msg: "Site is not accessible"
+      when: curl_output is failed
+
+    - name: Show netstat input
+      shell: netstat -tlpn
+      tags: check
