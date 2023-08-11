@@ -1,0 +1,1 @@
++ **Task 2 (from Lesson 3)**:  Install Vagrant, create two boxes (Ubuntu Server 14.04 - trusty64, CentOS 8 - centos8).
