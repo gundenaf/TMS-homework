@@ -1,0 +1,48 @@
+Disk /dev/loop0: 63.32 MiB, 66392064 bytes, 129672 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop1: 63.28 MiB, 66355200 bytes, 129600 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop2: 111.95 MiB, 117387264 bytes, 229272 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop3: 49.84 MiB, 52260864 bytes, 102072 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop4: 49.84 MiB, 52260864 bytes, 102072 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/sda: 25 GiB, 26843545600 bytes, 52428800 sectors
+Disk model: VBOX HARDDISK   
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: gpt
+Disk identifier: A4472850-8E39-4131-AE6A-91854EF358D9
+
+Device       Start      End  Sectors Size Type
+/dev/sda1     2048     4095     2048   1M BIOS boot
+/dev/sda2     4096  4198399  4194304   2G Linux filesystem
+/dev/sda3  4198400 52426751 48228352  23G Linux filesystem
+
+
+Disk /dev/mapper/ubuntu--vg-ubuntu--lv: 11.5 GiB, 12343836672 bytes, 24109056 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes

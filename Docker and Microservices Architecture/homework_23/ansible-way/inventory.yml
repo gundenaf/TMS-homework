@@ -1,0 +1,11 @@
+---
+all:
+  hosts:
+    ansible-node1:
+      ansible_host: 192.168.0.129
+      ansible_user: ansible
+      ansible_port: 22
+
+  vars:
+    ansible_connection: ssh
+    ansible_ssh_private_key_file: /home/slava/.ssh/id_ed25519

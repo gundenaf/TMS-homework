@@ -1,0 +1,437 @@
+Linux deimos 5.19.0-38-generic #39~22.04.1-Ubuntu SMP PREEMPT_DYNAMIC Fri Mar 17 21:16:15 UTC 2 x86_64 x86_64 x86_64 GNU/Linux
+Kernel
+modules
+info:
+====================
+Module                  Size  Used by
+vboxnetadp             28672  0
+vboxnetflt             28672  0
+vboxdrv               610304  2 vboxnetadp,vboxnetflt
+nft_ct                 24576  2
+nf_conntrack          176128  1 nft_ct
+nf_defrag_ipv6         24576  1 nf_conntrack
+nf_defrag_ipv4         16384  1 nf_conntrack
+l2tp_ppp               24576  0
+vmw_vsock_vmci_transport    32768  0
+xfrm_user              45056  2
+l2tp_netlink           24576  1 l2tp_ppp
+vsock                  49152  1 vmw_vsock_vmci_transport
+l2tp_core              57344  2 l2tp_ppp,l2tp_netlink
+xfrm_algo              16384  1 xfrm_user
+ip6_udp_tunnel         16384  1 l2tp_core
+udp_tunnel             28672  1 l2tp_core
+vmw_vmci               90112  1 vmw_vsock_vmci_transport
+pppox                  16384  1 l2tp_ppp
+nvidia_uvm           1232896  2
+intel_rapl_msr         20480  0
+intel_rapl_common      40960  1 intel_rapl_msr
+nvidia_drm             73728  14
+x86_pkg_temp_thermal    20480  0
+intel_powerclamp       24576  0
+coretemp               24576  0
+nvidia_modeset       1200128  19 nvidia_drm
+binfmt_misc            24576  1
+kvm_intel             434176  0
+kvm                  1130496  1 kvm_intel
+crct10dif_pclmul       16384  1
+ghash_clmulni_intel    16384  0
+mei_pxp                20480  0
+mei_hdcp               24576  0
+uvcvideo              114688  0
+videobuf2_vmalloc      20480  1 uvcvideo
+videobuf2_memops       20480  1 videobuf2_vmalloc
+snd_soc_rt5640        143360  0
+aesni_intel           376832  0
+videobuf2_v4l2         32768  1 uvcvideo
+snd_soc_rl6231         20480  1 snd_soc_rt5640
+crypto_simd            16384  1 aesni_intel
+i915                 3133440  0
+videobuf2_common       81920  4 videobuf2_vmalloc,videobuf2_v4l2,uvcvideo,videobuf2_memops
+cryptd                 24576  2 crypto_simd,ghash_clmulni_intel
+snd_soc_core          368640  1 snd_soc_rt5640
+snd_usb_audio         376832  1
+snd_hda_codec_realtek   163840  1
+nls_iso8859_1          16384  1
+videodev              274432  3 videobuf2_v4l2,uvcvideo,videobuf2_common
+snd_usbmidi_lib        45056  1 snd_usb_audio
+snd_hda_codec_generic   102400  1 snd_hda_codec_realtek
+rapl                   20480  0
+snd_compress           24576  1 snd_soc_core
+drm_buddy              20480  1 i915
+nvidia              35508224  1014 nvidia_uvm,nvidia_modeset
+ledtrig_audio          16384  1 snd_hda_codec_generic
+snd_hda_codec_hdmi     81920  1
+mc                     65536  5 videodev,snd_usb_audio,videobuf2_v4l2,uvcvideo,videobuf2_common
+joydev                 32768  0
+input_leds             16384  0
+ac97_bus               16384  1 snd_soc_core
+intel_cstate           20480  0
+ttm                    98304  1 i915
+snd_pcm_dmaengine      20480  1 snd_soc_core
+snd_hda_intel          53248  5
+drm_display_helper    184320  1 i915
+snd_seq_midi           20480  0
+snd_intel_dspcfg       36864  1 snd_hda_intel
+cec                    81920  2 drm_display_helper,i915
+snd_seq_midi_event     16384  1 snd_seq_midi
+snd_intel_sdw_acpi     20480  1 snd_intel_dspcfg
+snd_rawmidi            45056  2 snd_seq_midi,snd_usbmidi_lib
+snd_hda_codec         176128  4 snd_hda_codec_generic,snd_hda_codec_hdmi,snd_hda_intel,snd_hda_codec_realtek
+at24                   24576  0
+rc_core                65536  1 cec
+snd_hda_core          114688  5 snd_hda_codec_generic,snd_hda_codec_hdmi,snd_hda_intel,snd_hda_codec,snd_hda_codec_realtek
+snd_seq                77824  2 snd_seq_midi,snd_seq_midi_event
+snd_hwdep              20480  2 snd_usb_audio,snd_hda_codec
+drm_kms_helper        200704  3 drm_display_helper,nvidia_drm,i915
+i2c_algo_bit           16384  1 i915
+fb_sys_fops            16384  1 drm_kms_helper
+snd_pcm               155648  9 snd_hda_codec_hdmi,snd_hda_intel,snd_usb_audio,snd_hda_codec,snd_soc_rt5640,snd_compress,snd_soc_core,snd_hda_core,snd_pcm_dmaengine
+mei_me                 49152  2
+snd_seq_device         16384  3 snd_seq,snd_seq_midi,snd_rawmidi
+syscopyarea            16384  1 drm_kms_helper
+sysfillrect            20480  1 drm_kms_helper
+sysimgblt              20480  1 drm_kms_helper
+mei                   143360  5 mei_hdcp,mei_pxp,mei_me
+snd_timer              40960  2 snd_seq,snd_pcm
+snd                   114688  27 snd_hda_codec_generic,snd_seq,snd_seq_device,snd_hda_codec_hdmi,snd_hwdep,snd_hda_intel,snd_usb_audio,snd_usbmidi_lib,snd_hda_codec,snd_hda_codec_realtek,snd_timer,snd_compress,snd_soc_core,snd_pcm,snd_rawmidi
+soundcore              16384  1 snd
+mac_hid                16384  0
+acpi_pad              184320  0
+sch_fq_codel           24576  2
+msr                    16384  0
+nf_tables             278528  54 nft_ct
+parport_pc             53248  1
+ppdev                  24576  0
+libcrc32c              16384  2 nf_conntrack,nf_tables
+lp                     28672  0
+nfnetlink              20480  1 nf_tables
+ramoops                32768  0
+pstore_blk             16384  0
+parport                73728  3 parport_pc,lp,ppdev
+pstore_zone            32768  1 pstore_blk
+reed_solomon           28672  1 ramoops
+efi_pstore             16384  0
+drm                   581632  22 drm_kms_helper,drm_display_helper,nvidia,drm_buddy,nvidia_drm,i915,ttm
+ip_tables              32768  0
+x_tables               57344  1 ip_tables
+autofs4                45056  2
+hid_generic            16384  0
+usbhid                 65536  0
+hid                   159744  2 usbhid,hid_generic
+r8169                 102400  0
+i2c_i801               36864  0
+ahci                   49152  5
+xhci_pci               24576  0
+crc32_pclmul           16384  0
+libahci                49152  1 ahci
+i2c_smbus              20480  1 i2c_i801
+lpc_ich                28672  0
+realtek                32768  1
+xhci_pci_renesas       20480  1 xhci_pci
+video                  65536  1 i915
+====================
+Architecture:                    x86_64
+CPU op-mode(s):                  32-bit, 64-bit
+Address sizes:                   39 bits physical, 48 bits virtual
+Byte Order:                      Little Endian
+CPU(s):                          4
+On-line CPU(s) list:             0-3
+Vendor ID:                       GenuineIntel
+Model name:                      Intel(R) Core(TM) i5-4460  CPU @ 3.20GHz
+CPU family:                      6
+Model:                           60
+Thread(s) per core:              1
+Core(s) per socket:              4
+Socket(s):                       1
+Stepping:                        3
+CPU max MHz:                     3400.0000
+CPU min MHz:                     800.0000
+BogoMIPS:                        6399.72
+Flags:                           fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush dts acpi mmx fxsr sse sse2 ss ht tm pbe syscall nx pdpe1gb rdtscp lm constant_tsc arch_perfmon pebs bts rep_good nopl xtopology nonstop_tsc cpuid aperfmperf pni pclmulqdq dtes64 monitor ds_cpl vmx est tm2 ssse3 sdbg fma cx16 xtpr pdcm pcid sse4_1 sse4_2 x2apic movbe popcnt tsc_deadline_timer aes xsave avx f16c rdrand lahf_lm abm cpuid_fault invpcid_single pti ssbd ibrs ibpb stibp tpr_shadow vnmi flexpriority ept vpid ept_ad fsgsbase tsc_adjust bmi1 avx2 smep bmi2 erms invpcid xsaveopt dtherm ida arat pln pts md_clear flush_l1d
+Virtualization:                  VT-x
+L1d cache:                       128 KiB (4 instances)
+L1i cache:                       128 KiB (4 instances)
+L2 cache:                        1 MiB (4 instances)
+L3 cache:                        6 MiB (1 instance)
+NUMA node(s):                    1
+NUMA node0 CPU(s):               0-3
+Vulnerability Itlb multihit:     KVM: Mitigation: VMX disabled
+Vulnerability L1tf:              Mitigation; PTE Inversion; VMX conditional cache flushes, SMT disabled
+Vulnerability Mds:               Mitigation; Clear CPU buffers; SMT disabled
+Vulnerability Meltdown:          Mitigation; PTI
+Vulnerability Mmio stale data:   Unknown: No mitigations
+Vulnerability Retbleed:          Not affected
+Vulnerability Spec store bypass: Mitigation; Speculative Store Bypass disabled via prctl
+Vulnerability Spectre v1:        Mitigation; usercopy/swapgs barriers and __user pointer sanitization
+Vulnerability Spectre v2:        Mitigation; Retpolines, IBPB conditional, IBRS_FW, STIBP disabled, RSB filling, PBRSB-eIBRS Not affected
+Vulnerability Srbds:             Mitigation; Microcode
+Vulnerability Tsx async abort:   Not affected
+====================
+MemTotal:       16243048 kB
+MemFree:         7316496 kB
+MemAvailable:   10869396 kB
+Buffers:          172312 kB
+Cached:          3631700 kB
+SwapCached:            0 kB
+Active:          1624704 kB
+Inactive:        6528692 kB
+Active(anon):       9180 kB
+Inactive(anon):  4420064 kB
+Active(file):    1615524 kB
+Inactive(file):  2108628 kB
+Unevictable:         208 kB
+Mlocked:             208 kB
+SwapTotal:       8823804 kB
+SwapFree:        8823804 kB
+Zswap:                 0 kB
+Zswapped:              0 kB
+Dirty:              3892 kB
+Writeback:             0 kB
+AnonPages:       4349892 kB
+Mapped:          1413000 kB
+Shmem:            104068 kB
+KReclaimable:     161516 kB
+Slab:             362876 kB
+SReclaimable:     161516 kB
+SUnreclaim:       201360 kB
+KernelStack:       22648 kB
+PageTables:        60024 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:    16945328 kB
+Committed_AS:   15012372 kB
+VmallocTotal:   34359738367 kB
+VmallocUsed:      102488 kB
+VmallocChunk:          0 kB
+Percpu:             5072 kB
+HardwareCorrupted:     0 kB
+AnonHugePages:         0 kB
+ShmemHugePages:        0 kB
+ShmemPmdMapped:        0 kB
+FileHugePages:         0 kB
+FilePmdMapped:         0 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+Hugetlb:               0 kB
+DirectMap4k:      671536 kB
+DirectMap2M:    11769856 kB
+DirectMap1G:     4194304 kB
+====================
+Disk /dev/loop0: 4 KiB, 4096 bytes, 8 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop1: 55.61 MiB, 58310656 bytes, 113888 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop2: 55.61 MiB, 58314752 bytes, 113896 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop3: 63.29 MiB, 66359296 bytes, 129608 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop4: 63.32 MiB, 66392064 bytes, 129672 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop5: 72.98 MiB, 76521472 bytes, 149456 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop6: 72.99 MiB, 76537856 bytes, 149488 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop7: 241.61 MiB, 253349888 bytes, 494824 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/sda: 232.89 GiB, 250059350016 bytes, 488397168 sectors
+Disk model: Samsung SSD 850 
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+Disklabel type: gpt
+Disk identifier: 63C015BD-0954-4584-B816-88BB3B4B4D44
+
+Device         Start       End   Sectors   Size Type
+/dev/sda1       2048   2000895   1998848   976M EFI System
+/dev/sda2    2000896 197312511 195311616  93.1G Linux filesystem
+/dev/sda3  197312512 470749183 273436672 130.4G Linux filesystem
+/dev/sda4  470749184 488396799  17647616   8.4G Linux swap
+
+
+Disk /dev/sdb: 931.51 GiB, 1000204886016 bytes, 1953525168 sectors
+Disk model: ST1000DM003-9YN1
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 4096 bytes
+I/O size (minimum/optimal): 4096 bytes / 4096 bytes
+Disklabel type: gpt
+Disk identifier: 1945A199-3F16-4963-BE53-2D1E0B91EFA7
+
+Device     Start        End    Sectors   Size Type
+/dev/sdb2   2048 1953523711 1953521664 931.5G Linux filesystem
+
+
+Disk /dev/loop8: 239.88 MiB, 251527168 bytes, 491264 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop9: 346.33 MiB, 363151360 bytes, 709280 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop10: 349.69 MiB, 366673920 bytes, 716160 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop11: 460.27 MiB, 482631680 bytes, 942640 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop12: 460.39 MiB, 482750464 bytes, 942872 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop13: 91.69 MiB, 96141312 bytes, 187776 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop14: 45.86 MiB, 48091136 bytes, 93928 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop15: 45.93 MiB, 48160768 bytes, 94064 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop16: 49.84 MiB, 52260864 bytes, 102072 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop17: 49.84 MiB, 52260864 bytes, 102072 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop18: 304 KiB, 311296 bytes, 608 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop19: 428 KiB, 438272 bytes, 856 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop20: 45.58 MiB, 47796224 bytes, 93352 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop21: 303.08 MiB, 317800448 bytes, 620704 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop22: 346.82 MiB, 363663360 bytes, 710280 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+
+
+Disk /dev/loop23: 346.76 MiB, 363601920 bytes, 710160 sectors
+Units: sectors of 1 * 512 = 512 bytes
+Sector size (logical/physical): 512 bytes / 512 bytes
+I/O size (minimum/optimal): 512 bytes / 512 bytes
+====================
+Filesystem      Size  Used Avail Use% Mounted on
+tmpfs           1.6G  2.2M  1.6G   1% /run
+/dev/sda2        92G   24G   64G  27% /
+tmpfs           7.8G   41M  7.8G   1% /dev/shm
+tmpfs           5.0M  4.0K  5.0M   1% /run/lock
+/dev/sda3       128G   72G   50G  60% /home
+/dev/sda1       975M  6.1M  968M   1% /boot/efi
+tmpfs           7.8G     0  7.8G   0% /run/qemu
+/dev/sdb2       916G  177G  693G  21% /mnt/hdd
+tmpfs           1.6G  148K  1.6G   1% /run/user/1000
+====================
+00:00.0 Host bridge: Intel Corporation 4th Gen Core Processor DRAM Controller (rev 06)
+00:01.0 PCI bridge: Intel Corporation Xeon E3-1200 v3/4th Gen Core Processor PCI Express x16 Controller (rev 06)
+00:02.0 VGA compatible controller: Intel Corporation Xeon E3-1200 v3/4th Gen Core Processor Integrated Graphics Controller (rev 06)
+00:03.0 Audio device: Intel Corporation Xeon E3-1200 v3/4th Gen Core Processor HD Audio Controller (rev 06)
+00:14.0 USB controller: Intel Corporation 9 Series Chipset Family USB xHCI Controller
+00:16.0 Communication controller: Intel Corporation 9 Series Chipset Family ME Interface #1
+00:1a.0 USB controller: Intel Corporation 9 Series Chipset Family USB EHCI Controller #2
+00:1b.0 Audio device: Intel Corporation 9 Series Chipset Family HD Audio Controller
+00:1c.0 PCI bridge: Intel Corporation 9 Series Chipset Family PCI Express Root Port 1 (rev d0)
+00:1c.2 PCI bridge: Intel Corporation 9 Series Chipset Family PCI Express Root Port 3 (rev d0)
+00:1c.3 PCI bridge: Intel Corporation 9 Series Chipset Family PCI Express Root Port 4 (rev d0)
+00:1d.0 USB controller: Intel Corporation 9 Series Chipset Family USB EHCI Controller #1
+00:1f.0 ISA bridge: Intel Corporation Z97 Chipset LPC Controller
+00:1f.2 SATA controller: Intel Corporation 9 Series Chipset Family SATA Controller [AHCI Mode]
+00:1f.3 SMBus: Intel Corporation 9 Series Chipset Family SMBus Controller
+01:00.0 VGA compatible controller: NVIDIA Corporation GK107 [GeForce GTX 650] (rev a1)
+01:00.1 Audio device: NVIDIA Corporation GK107 HDMI Audio Controller (rev a1)
+03:00.0 Ethernet controller: Realtek Semiconductor Co., Ltd. RTL8111/8168/8411 PCI Express Gigabit Ethernet Controller (rev 06)
+04:00.0 PCI bridge: Intel Corporation 82801 PCI Bridge (rev 41)
+====================
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: enp3s0: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether fc:aa:14:03:f5:af brd ff:ff:ff:ff:ff:ff
+    inet 172.17.0.97/22 brd 172.17.3.255 scope global dynamic noprefixroute enp3s0
+       valid_lft 1201962sec preferred_lft 1201962sec
+    inet6 fe80::6237:fe93:7fa1:ecfc/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+====================

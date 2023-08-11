@@ -1,0 +1,162 @@
+---
+- name: Install Docker on remote Debian hosts
+  hosts: ansible-node1
+  become: true
+
+  tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+
+    - name: Install required packages for Docker
+      package:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - apt-transport-https
+        - ca-certificates
+        - curl
+        - gnupg
+        - lsb-release
+
+    - name: Add Docker GPG key
+      apt_key:
+        url: https://download.docker.com/linux/debian/gpg
+
+    - name: Add Docker repository
+      apt_repository:
+        repo: "deb [arch=amd64] https://download.docker.com/linux/debian {{ ansible_distribution_release }} stable"
+        state: present
+
+    - name: Install Docker packages
+      package:
+        name:
+          - docker-ce
+          - docker-ce-cli
+          - containerd.io
+          - docker-buildx-plugin
+          - docker-compose-plugin
+        state: present
+
+    - name: Start and enable Docker service
+      service:
+        name: docker
+        state: started
+        enabled: yes
+
+- name: Pull Docker images
+  hosts: ansible-node1
+  become: true
+  tasks:
+    - name: Pull DockerHub images
+      docker_image:
+        name: "{{ item }}"
+        source: pull
+      loop:
+        - debian:latest
+        - alpine:latest
+
+- name: Manage Docker containers
+  hosts: ansible-node1
+  become: true
+  tasks:
+    - name: Start dos-debian container
+      docker_container:
+        name: dos-debian
+        image: debian:latest
+        ports:
+          - "2222:22"
+        env:
+          SSH_PORT_FORWARD_REASON: "SSH port is forwarded to ensure secure access to the SSH server inside the container."
+        state: started
+
+    - name: Start dos-alpine container
+      docker_container:
+        name: dos-alpine
+        image: alpine:latest
+        ports:
+          - "2223:22"
+        env:
+          SSH_PORT_FORWARD_REASON: "SSH port is forwarded to ensure secure access to the SSH server inside the container."
+        state: started
+
+    - name: Show running containers
+      shell: docker ps
+      register: running_containers_output
+      ignore_errors: true
+
+    - name: Debug output for running containers
+      debug:
+        var: running_containers_output.stdout_lines
+
+    - name: Stop containers
+      docker_container:
+        name: "{{ item }}"
+        state: stopped
+      loop:
+        - dos-debian
+        - dos-alpine
+
+    - name: Show running containers after stopping
+      shell: docker ps
+      register: running_containers_output_after_stopping
+      ignore_errors: true
+
+    - name: Debug output for running containers after stopping
+      debug:
+        var: running_containers_output_after_stopping.stdout_lines
+
+    - name: Remove containers
+      docker_container:
+        name: "{{ item }}"
+        state: absent
+      loop:
+        - dos-debian
+        - dos-alpine
+
+    - name: Show list of all Docker images
+      shell: docker images
+      register: docker_images
+
+    - name: Debug output for Docker images
+      debug:
+        var: docker_images.stdout_lines
+
+- name: Cleanup Docker resources
+  hosts: ansible-node1
+  become: true
+  tasks:
+    - name: Show system space
+      shell: df -h
+      register: disk_space_before
+
+    - name: Debug output for disk space before cleanup
+      debug:
+        var: disk_space_before.stdout_lines
+
+    - name: Get Docker image info
+      community.general.docker_image_info:
+      register: docker_images_info
+
+    - name: Find and remove the largest image
+      docker_image:
+        name: "{{ item | string }}"
+        state: absent
+      loop: "{{ docker_images_info.images | sort(attribute='Size', reverse=true) | map(attribute='Id') | list }}"
+
+    - name: Show system space after removing images
+      shell: df -h
+      register: disk_space_after
+
+    - name: Debug output for disk space after cleanup
+      debug:
+        var: disk_space_after.stdout_lines
+
+    - name: Check for changes in disk space
+      assert:
+        that:
+          - disk_space_before.stdout_lines != disk_space_after.stdout_lines
+        fail_msg: "Disk space did not change after cleanup."
+
+    - name: Run 'docker system prune' to clean up unused data
+      shell: docker system prune -f

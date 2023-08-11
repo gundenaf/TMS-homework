@@ -1,0 +1,306 @@
+[test@centos-test ~]$ ip a
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: enp0s3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 08:00:27:df:2b:02 brd ff:ff:ff:ff:ff:ff
+    inet 172.17.0.91/22 brd 172.17.3.255 scope global dynamic noprefixroute enp0s3
+       valid_lft 1209592sec preferred_lft 1209592sec
+    inet6 fe80::a00:27ff:fedf:2b02/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+[test@centos-test ~]$ df -h
+Filesystem                        Size  Used Avail Use% Mounted on
+devtmpfs                          870M     0  870M   0% /dev
+tmpfs                             890M     0  890M   0% /dev/shm
+tmpfs                             890M  8.5M  881M   1% /run
+tmpfs                             890M     0  890M   0% /sys/fs/cgroup
+/dev/mapper/cl_centos--test-root   22G  1.9G   21G   9% /
+/dev/sda1                        1014M  220M  795M  22% /boot
+tmpfs                             178M     0  178M   0% /run/user/1000
+[test@centos-test ~]$ ping -c 4 8.8.8.8
+PING 8.8.8.8 (8.8.8.8) 56(84) bytes of data.
+64 bytes from 8.8.8.8: icmp_seq=1 ttl=115 time=22.4 ms
+64 bytes from 8.8.8.8: icmp_seq=2 ttl=115 time=22.3 ms
+64 bytes from 8.8.8.8: icmp_seq=3 ttl=115 time=22.4 ms
+64 bytes from 8.8.8.8: icmp_seq=4 ttl=115 time=22.5 ms
+
+--- 8.8.8.8 ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3029ms
+rtt min/avg/max/mdev = 22.321/22.400/22.506/0.163 ms
+[test@centos-test ~]$ ping -c 4 google.com
+PING google.com (142.250.186.206) 56(84) bytes of data.
+64 bytes from waw07s05-in-f14.1e100.net (142.250.186.206): icmp_seq=1 ttl=113 time=36.8 ms
+64 bytes from waw07s05-in-f14.1e100.net (142.250.186.206): icmp_seq=2 ttl=113 time=36.10 ms
+64 bytes from waw07s05-in-f14.1e100.net (142.250.186.206): icmp_seq=3 ttl=113 time=37.0 ms
+64 bytes from waw07s05-in-f14.1e100.net (142.250.186.206): icmp_seq=4 ttl=113 time=36.8 ms
+
+--- google.com ping statistics ---
+4 packets transmitted, 4 received, 0% packet loss, time 3019ms
+rtt min/avg/max/mdev = 36.770/36.896/37.016/0.098 ms
+[test@centos-test ~]$ ls -lah /
+total 16K
+dr-xr-xr-x.  17 root root  224 Apr  4 12:23 .
+dr-xr-xr-x.  17 root root  224 Apr  4 12:23 ..
+lrwxrwxrwx.   1 root root    7 Jun 22  2021 bin -> usr/bin
+dr-xr-xr-x.   5 root root 4.0K Apr  4 12:40 boot
+drwxr-xr-x.  20 root root 3.0K Apr  5 11:43 dev
+drwxr-xr-x.  81 root root 8.0K Apr  5 11:43 etc
+drwxr-xr-x.   3 root root   18 Apr  4 12:25 home
+lrwxrwxrwx.   1 root root    7 Jun 22  2021 lib -> usr/lib
+lrwxrwxrwx.   1 root root    9 Jun 22  2021 lib64 -> usr/lib64
+drwxr-xr-x.   2 root root    6 Jun 22  2021 media
+drwxr-xr-x.   2 root root    6 Jun 22  2021 mnt
+drwxr-xr-x.   2 root root    6 Jun 22  2021 opt
+dr-xr-xr-x. 128 root root    0 Apr  5 11:42 proc
+dr-xr-x---.   2 root root  135 Apr  4 12:40 root
+drwxr-xr-x.  27 root root  760 Apr  5 11:43 run
+lrwxrwxrwx.   1 root root    8 Jun 22  2021 sbin -> usr/sbin
+drwxr-xr-x.   2 root root    6 Jun 22  2021 srv
+dr-xr-xr-x.  13 root root    0 Apr  5 11:42 sys
+drwxrwxrwt.   8 root root  224 Apr  5 11:44 tmp
+drwxr-xr-x.  12 root root  144 Apr  4 12:14 usr
+drwxr-xr-x.  20 root root  278 Apr  4 12:38 var
+[test@centos-test ~]$ uname -a
+Linux centos-test 4.18.0-481.el8.x86_64 #1 SMP Tue Mar 21 12:15:10 UTC 2023 x86_64 x86_64 x86_64 GNU/Linux
+[test@centos-test ~]$ lspci
+00:00.0 Host bridge: Intel Corporation 440FX - 82441FX PMC [Natoma] (rev 02)
+00:01.0 ISA bridge: Intel Corporation 82371SB PIIX3 ISA [Natoma/Triton II]
+00:01.1 IDE interface: Intel Corporation 82371AB/EB/MB PIIX4 IDE (rev 01)
+00:02.0 VGA compatible controller: VMware SVGA II Adapter
+00:03.0 Ethernet controller: Intel Corporation 82540EM Gigabit Ethernet Controller (rev 02)
+00:04.0 System peripheral: InnoTek Systemberatung GmbH VirtualBox Guest Service
+00:05.0 Multimedia audio controller: Intel Corporation 82801AA AC'97 Audio Controller (rev 01)
+00:06.0 USB controller: Apple Inc. KeyLargo/Intrepid USB
+00:07.0 Bridge: Intel Corporation 82371AB/EB/MB PIIX4 ACPI (rev 08)
+00:08.0 Ethernet controller: Intel Corporation 82540EM Gigabit Ethernet Controller (rev 02)
+00:0b.0 USB controller: Intel Corporation 82801FB/FBM/FR/FW/FRW (ICH6 Family) USB2 EHCI Controller
+00:0d.0 SATA controller: Intel Corporation 82801HM/HEM (ICH8M/ICH8M-E) SATA Controller [AHCI mode] (rev 02)
+[test@centos-test ~]$ lscpu
+Architecture:        x86_64
+CPU op-mode(s):      32-bit, 64-bit
+Byte Order:          Little Endian
+CPU(s):              2
+On-line CPU(s) list: 0,1
+Thread(s) per core:  1
+Core(s) per socket:  2
+Socket(s):           1
+NUMA node(s):        1
+Vendor ID:           GenuineIntel
+CPU family:          6
+Model:               60
+Model name:          Intel(R) Core(TM) i5-4460  CPU @ 3.20GHz
+Stepping:            3
+CPU MHz:             3200.074
+BogoMIPS:            6400.14
+Hypervisor vendor:   KVM
+Virtualization type: full
+L1d cache:           32K
+L1i cache:           32K
+L2 cache:            256K
+L3 cache:            6144K
+NUMA node0 CPU(s):   0,1
+Flags:               fpu vme de pse tsc msr pae mce cx8 apic sep mtrr pge mca cmov pat pse36 clflush mmx fxsr sse sse2 ht syscall nx rdtscp lm constant_tsc rep_good nopl xtopology nonstop_tsc cpuid tsc_known_freq pni pclmulqdq ssse3 cx16 pcid sse4_1 sse4_2 x2apic movbe popcnt aes xsave avx rdrand hypervisor lahf_lm abm invpcid_single pti fsgsbase bmi1 avx2 bmi2 invpcid md_clear flush_l1d
+[test@centos-test ~]$ cat /proc/meminfo 
+MemTotal:        1821096 kB
+MemFree:         1484520 kB
+MemAvailable:    1511580 kB
+Buffers:            4204 kB
+Cached:           149884 kB
+SwapCached:            0 kB
+Active:            77088 kB
+Inactive:         150740 kB
+Active(anon):        856 kB
+Inactive(anon):    81544 kB
+Active(file):      76232 kB
+Inactive(file):    69196 kB
+Unevictable:           0 kB
+Mlocked:               0 kB
+SwapTotal:       2158588 kB
+SwapFree:        2158588 kB
+Dirty:                 0 kB
+Writeback:             0 kB
+AnonPages:         73776 kB
+Mapped:            47016 kB
+Shmem:              8660 kB
+KReclaimable:      24824 kB
+Slab:              56904 kB
+SReclaimable:      24824 kB
+SUnreclaim:        32080 kB
+KernelStack:        2128 kB
+PageTables:         4496 kB
+NFS_Unstable:          0 kB
+Bounce:                0 kB
+WritebackTmp:          0 kB
+CommitLimit:     3069136 kB
+Committed_AS:     272012 kB
+VmallocTotal:   34359738367 kB
+VmallocUsed:       32424 kB
+VmallocChunk:          0 kB
+Percpu:              864 kB
+HardwareCorrupted:     0 kB
+AnonHugePages:     16384 kB
+ShmemHugePages:        0 kB
+ShmemPmdMapped:        0 kB
+FileHugePages:         0 kB
+FilePmdMapped:         0 kB
+HugePages_Total:       0
+HugePages_Free:        0
+HugePages_Rsvd:        0
+HugePages_Surp:        0
+Hugepagesize:       2048 kB
+Hugetlb:               0 kB
+DirectMap4k:       92096 kB
+DirectMap2M:     2004992 kB
+[test@centos-test ~]$ lsmod >> kernel_list.txt 
+[test@centos-test ~]$ cat kernel_list.txt 
+Module                  Size  Used by
+nft_fib_inet           16384  1
+nft_fib_ipv4           16384  1 nft_fib_inet
+nft_fib_ipv6           16384  1 nft_fib_inet
+nft_fib                16384  3 nft_fib_ipv6,nft_fib_ipv4,nft_fib_inet
+nft_reject_inet        16384  4
+nf_reject_ipv4         16384  1 nft_reject_inet
+nf_reject_ipv6         16384  1 nft_reject_inet
+nft_reject             16384  1 nft_reject_inet
+nft_ct                 20480  9
+nf_tables_set          49152  12
+nft_chain_nat          16384  12
+nf_nat                 45056  1 nft_chain_nat
+nf_conntrack          172032  2 nf_nat,nft_ct
+nf_defrag_ipv6         20480  1 nf_conntrack
+nf_defrag_ipv4         16384  1 nf_conntrack
+ip_set                 49152  0
+nf_tables             180224  235 nft_ct,nft_reject_inet,nft_fib_ipv6,nft_fib_ipv4,nft_chain_nat,nf_tables_set,nft_reject,nft_fib,nft_fib_inet
+nfnetlink              16384  3 nf_tables,ip_set
+snd_intel8x0           45056  0
+snd_ac97_codec        147456  1 snd_intel8x0
+intel_rapl_msr         16384  0
+intel_rapl_common      24576  1 intel_rapl_msr
+ac97_bus               16384  1 snd_ac97_codec
+snd_pcm               131072  2 snd_intel8x0,snd_ac97_codec
+snd_timer              36864  1 snd_pcm
+crct10dif_pclmul       16384  1
+snd                   110592  4 snd_intel8x0,snd_timer,snd_ac97_codec,snd_pcm
+crc32_pclmul           16384  0
+ghash_clmulni_intel    16384  0
+soundcore              16384  1 snd
+pcspkr                 16384  0
+rapl                   20480  0
+i2c_piix4              24576  0
+video                  53248  0
+xfs                  1585152  2
+libcrc32c              16384  4 nf_conntrack,nf_nat,nf_tables,xfs
+sr_mod                 28672  0
+cdrom                  65536  1 sr_mod
+sd_mod                 53248  3
+t10_pi                 16384  1 sd_mod
+sg                     40960  0
+ata_generic            16384  0
+vmwgfx                376832  1
+drm_ttm_helper         16384  1 vmwgfx
+ttm                    81920  2 vmwgfx,drm_ttm_helper
+drm_kms_helper        167936  1 vmwgfx
+syscopyarea            16384  1 drm_kms_helper
+ahci                   40960  2
+sysfillrect            16384  1 drm_kms_helper
+sysimgblt              16384  1 drm_kms_helper
+fb_sys_fops            16384  1 drm_kms_helper
+drm                   577536  5 vmwgfx,drm_kms_helper,drm_ttm_helper,ttm
+libahci                40960  1 ahci
+crc32c_intel           24576  1
+ata_piix               36864  0
+serio_raw              16384  0
+libata                266240  4 ata_piix,libahci,ahci,ata_generic
+e1000                 151552  0
+dm_mirror              28672  0
+dm_region_hash         20480  1 dm_mirror
+dm_log                 20480  2 dm_region_hash,dm_mirror
+dm_mod                151552  9 dm_log,dm_mirror
+Module                  Size  Used by
+nft_fib_inet           16384  1
+nft_fib_ipv4           16384  1 nft_fib_inet
+nft_fib_ipv6           16384  1 nft_fib_inet
+nft_fib                16384  3 nft_fib_ipv6,nft_fib_ipv4,nft_fib_inet
+nft_reject_inet        16384  4
+nf_reject_ipv4         16384  1 nft_reject_inet
+nf_reject_ipv6         16384  1 nft_reject_inet
+nft_reject             16384  1 nft_reject_inet
+nft_ct                 20480  9
+nf_tables_set          49152  12
+nft_chain_nat          16384  12
+nf_nat                 45056  1 nft_chain_nat
+nf_conntrack          172032  2 nf_nat,nft_ct
+nf_defrag_ipv6         20480  1 nf_conntrack
+nf_defrag_ipv4         16384  1 nf_conntrack
+ip_set                 49152  0
+nf_tables             180224  259 nft_ct,nft_reject_inet,nft_fib_ipv6,nft_fib_ipv4,nft_chain_nat,nf_tables_set,nft_reject,nft_fib,nft_fib_inet
+nfnetlink              16384  3 nf_tables,ip_set
+snd_intel8x0           45056  0
+snd_ac97_codec        147456  1 snd_intel8x0
+ac97_bus               16384  1 snd_ac97_codec
+snd_pcm               131072  2 snd_intel8x0,snd_ac97_codec
+snd_timer              36864  1 snd_pcm
+intel_rapl_msr         16384  0
+snd                   110592  4 snd_intel8x0,snd_timer,snd_ac97_codec,snd_pcm
+intel_rapl_common      24576  1 intel_rapl_msr
+crct10dif_pclmul       16384  1
+crc32_pclmul           16384  0
+soundcore              16384  1 snd
+ghash_clmulni_intel    16384  0
+rapl                   20480  0
+pcspkr                 16384  0
+i2c_piix4              24576  0
+video                  53248  0
+xfs                  1585152  2
+libcrc32c              16384  4 nf_conntrack,nf_nat,nf_tables,xfs
+sr_mod                 28672  0
+sd_mod                 53248  3
+cdrom                  65536  1 sr_mod
+t10_pi                 16384  1 sd_mod
+sg                     40960  0
+ata_generic            16384  0
+vmwgfx                376832  1
+drm_ttm_helper         16384  1 vmwgfx
+ttm                    81920  2 vmwgfx,drm_ttm_helper
+drm_kms_helper        167936  1 vmwgfx
+syscopyarea            16384  1 drm_kms_helper
+sysfillrect            16384  1 drm_kms_helper
+sysimgblt              16384  1 drm_kms_helper
+ata_piix               36864  0
+fb_sys_fops            16384  1 drm_kms_helper
+ahci                   40960  2
+libahci                40960  1 ahci
+drm                   577536  5 vmwgfx,drm_kms_helper,drm_ttm_helper,ttm
+libata                266240  4 ata_piix,libahci,ahci,ata_generic
+crc32c_intel           24576  1
+serio_raw              16384  0
+e1000                 151552  0
+dm_mirror              28672  0
+dm_region_hash         20480  1 dm_mirror
+dm_log                 20480  2 dm_region_hash,dm_mirror
+dm_mod                151552  9 dm_log,dm_mirror
+
+
+## Boot with second Ethernet adapter
+[test@centos-test ~]$ ip a
+1: lo: <LOOPBACK,UP,LOWER_UP> mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000
+    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00
+    inet 127.0.0.1/8 scope host lo
+       valid_lft forever preferred_lft forever
+    inet6 ::1/128 scope host 
+       valid_lft forever preferred_lft forever
+2: enp0s3: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 08:00:27:df:2b:02 brd ff:ff:ff:ff:ff:ff
+    inet 172.17.0.91/22 brd 172.17.3.255 scope global dynamic noprefixroute enp0s3
+       valid_lft 1209592sec preferred_lft 1209592sec
+    inet6 fe80::a00:27ff:fedf:2b02/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
+3: enp0s8: <BROADCAST,MULTICAST,UP,LOWER_UP> mtu 1500 qdisc fq_codel state UP group default qlen 1000
+    link/ether 08:00:27:94:b1:60 brd ff:ff:ff:ff:ff:ff
+    inet 10.10.8.5/22 brd 10.10.11.255 scope global dynamic noprefixroute enp0s8
+       valid_lft 591sec preferred_lft 591sec
+    inet6 fe80::5f40:2139:766f:994/64 scope link noprefixroute 
+       valid_lft forever preferred_lft forever
