@@ -1,5 +1,3 @@
-# Homework No27
-
 ## Goal: Reinforce and Practice Fundamental Concepts and Data Manipulation Methods in Python
 
 The goal of this assignment is to reinforce and practice fundamental concepts and data manipulation methods in Python, such as working with strings, lists, tuples, and dictionaries, as well as using loops and conditional statements.

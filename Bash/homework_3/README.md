@@ -1,4 +1,4 @@
-# Homework No. 14 - Bash Scripting Optimization and Debugging
+# Bash Scripting Optimization and Debugging
 
 ## Task 1: Debugging Bash Scripts
 

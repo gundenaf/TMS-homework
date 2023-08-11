@@ -1,5 +1,3 @@
-# Homework No26
-
 ## Goal: Introduction to Python Programming Basics
 
 The goal of this assignment is to familiarize yourself with the basics of the Python programming language, its data types, and learn how to create simple Python programs. Throughout the tasks, you will install Python on your computer, explore the history of Python, study Python data types, work with strings, numbers, and variables in Python.

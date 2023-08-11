@@ -1,4 +1,4 @@
-# Homework No23: Practical Experience with Docker Commands
+# Practical Experience with Docker Commands
 
 ## Task 1: Launching a Container using `docker run`
 

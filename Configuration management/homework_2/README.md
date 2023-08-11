@@ -1,4 +1,4 @@
-# Homework No. 21 - Setting Up Ansible Environment
+# Setting Up Ansible Environment
 
 ## Objective:
 The goal of this assignment is to configure the Ansible environment on your local machine, enabling you to use it for automating configuration management and deployment of applications on remote servers.

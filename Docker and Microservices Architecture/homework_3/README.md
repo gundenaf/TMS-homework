@@ -1,5 +1,3 @@
-# Homework No25
-
 ## Task 1: Creating a Dockerfile for a Web Server Application
 
 The goal of this task is to gain practical experience in writing a Dockerfile to create a container with a web server application based on the Ubuntu 20.04 image. The application should run on port 8080 and serve static files from the /app/static directory.

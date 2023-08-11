@@ -1,4 +1,4 @@
-# Homework No. 19 - Building a Fault-Tolerant PostgreSQL Solution
+# Building a Fault-Tolerant PostgreSQL Solution
 
 ## Objective:
 The goal of this assignment is to learn how to implement a fault-tolerant solution for databases using PostgreSQL as an example. The tasks involve setting up servers, configuring replication, ensuring high availability, and testing the fault-tolerant solution.

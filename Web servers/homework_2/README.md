@@ -1,4 +1,4 @@
-# Homework No. 16 - Web Server Performance Testing
+# Web Server Performance Testing
 
 ## Objective:
 The goal of this assignment is to conduct performance testing on your web server to assess its performance under heavy loads and various types of user activity.

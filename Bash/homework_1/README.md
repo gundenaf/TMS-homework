@@ -1,4 +1,4 @@
-# Homework No. 12 - Bash Scripting and Automation
+# Bash Scripting and Automation
 
 The goal of this homework is to learn how to perform automation tasks using Bash scripting.
 

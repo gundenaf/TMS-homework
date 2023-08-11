@@ -1,4 +1,4 @@
-# Homework No. 18 - SQL Queries and Database Management
+# SQL Queries and Database Management
 
 ## Objective:
 The aim of this assignment is to gain practical experience in writing SQL queries and managing a database. The tasks involve retrieving specific data, performing database backup and restoration, and setting up an automated backup process.

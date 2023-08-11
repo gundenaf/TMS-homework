@@ -1,5 +1,3 @@
-# Homework No24
-
 ## Task 1: Launching Application Instances with Volume and Network Attachment
 
 The goal of this task is to gain practical experience with Docker commands by launching application instances with volume and network attachment. You will also learn how to use the `docker logs` command.

@@ -1,4 +1,4 @@
-# Homework No. 20 - Working with Ansible Configuration Management
+# Working with Ansible Configuration Management
 
 ## Objective:
 The aim of this assignment is to gain practical experience with the configuration management system Ansible. Before starting, set up an additional virtual machine that will be managed using Ansible.

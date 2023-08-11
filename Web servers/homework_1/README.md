@@ -1,4 +1,4 @@
-# Homework No. 15 - Nginx Web Server Installation and Configuration
+# Nginx Web Server Installation and Configuration
 
 ## Task 1: Nginx Installation and Configuration
 

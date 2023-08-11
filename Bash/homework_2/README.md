@@ -1,4 +1,4 @@
-# Homework No. 13 - String Manipulation and Regular Expressions in Bash
+# String Manipulation and Regular Expressions in Bash
 
 The goal of this homework is to gain practical experience in working with strings and regular expressions in Bash, as well as learning about logical blocks and functions.
 
