@@ -86,7 +86,13 @@ def replace_vowels(input_string):
     print('Modified string:', modified_string)
 
 def unique_elements_from_lists(list1, list2):
-    unique_elements = list(set(list1) | set(list2))
+    unique_elements = []
+    for item in list1:
+        if item not in unique_elements:
+            unique_elements.append(item)
+    for item in list2:
+        if item not in unique_elements:
+            unique_elements.append(item)
     print('Unique elements from both lists:', unique_elements)
 
 if __name__ == '__main__':
