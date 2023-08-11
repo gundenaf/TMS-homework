@@ -1,4 +1,4 @@
-# Homework No. 11 - Git Practical Experience and Version Control
+# Git Practical Experience and Version Control
 
 ## Task 1
 
