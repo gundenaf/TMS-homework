@@ -1,5 +1,5 @@
 pipeline {
-    agent { label 'docker'}
+    agent { label 'jenkins-agent'}
     parameters {
         string(name: "TEST_STRING", defaultValue: "syntax testing", description: "Sample string parameter")
     }
@@ -34,6 +34,7 @@ pipeline {
         }  
 
         stage('Build Docker Image') {
+            agent { label 'docker'}
             steps {
                 echo 'Building Docker Image'
                 echo 'docker build -t myapp:latest .'
