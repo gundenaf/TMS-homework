@@ -33,7 +33,7 @@ pipeline {
                 sh 'docker stop nodetodoapp || true'
                 sh 'docker rm nodetodoapp || true'
                 echo 'Disclaimer: it is fictional stage, container just launching. DockerHub was removed from this pipeline.'
-                sh 'docker run -d --name nodetodoapp -p 80:80 basanagoudapatil/nodo-todo-app-test:latest'
+                sh 'docker run -d --name nodetodoapp -p 8000:8000 basanagoudapatil/nodo-todo-app-test:latest'
             }
         }
   }
