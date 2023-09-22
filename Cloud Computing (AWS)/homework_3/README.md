@@ -1,6 +1,6 @@
 ## AWS CLI Usage
 
-## Goal: Familiarize yourself with key AWS services, such as Elastic Load Balancer, Auto Scaling, and Amazon Route 53. This task will help you understand how to configure and utilize AWS services to ensure high availability and scalability of your application. 
+## Goal: Familiarize yourself with key AWS services, such as Elastic Load Balancer, Auto Scaling. This task will help you understand how to configure and utilize AWS services to ensure high availability and scalability of your application. 
 
 ## Tasks:
 
