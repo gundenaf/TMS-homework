@@ -13,7 +13,7 @@ slava@phobos:~$ aws ec2 create-vpc --cidr-block 10.0.0.0/16 --tag-specifications
         "DhcpOptionsId": "dopt-0d4f27337074e6c30",
         "State": "pending",
         "VpcId": "vpc-01062200bc59b3189",
-        "OwnerId": "335809563306",
+        "OwnerId": "*************",
         "InstanceTenancy": "default",
         "Ipv6CidrBlockAssociationSet": [],
         "CidrBlockAssociationSet": [
@@ -47,10 +47,10 @@ slava@phobos:~$ aws ec2 create-subnet --vpc-id vpc-01062200bc59b3189 --cidr-bloc
         "State": "available",
         "SubnetId": "subnet-06ad715e32e5d9299",
         "VpcId": "vpc-01062200bc59b3189",
-        "OwnerId": "335809563306",
+        "OwnerId": "*************",
         "AssignIpv6AddressOnCreation": false,
         "Ipv6CidrBlockAssociationSet": [],
-        "SubnetArn": "arn:aws:ec2:us-east-1:335809563306:subnet/subnet-06ad715e32e5d9299",
+        "SubnetArn": "arn:aws:ec2:us-east-1:*************:subnet/subnet-06ad715e32e5d9299",
         "EnableDns64": false,
         "Ipv6Native": false,
         "PrivateDnsNameOptionsOnLaunch": {
@@ -73,10 +73,10 @@ slava@phobos:~$ aws ec2 create-subnet --vpc-id vpc-01062200bc59b3189 --cidr-bloc
         "State": "available",
         "SubnetId": "subnet-0d76b32dc45c72bdc",
         "VpcId": "vpc-01062200bc59b3189",
-        "OwnerId": "335809563306",
+        "OwnerId": "*************",
         "AssignIpv6AddressOnCreation": false,
         "Ipv6CidrBlockAssociationSet": [],
-        "SubnetArn": "arn:aws:ec2:us-east-1:335809563306:subnet/subnet-0d76b32dc45c72bdc",
+        "SubnetArn": "arn:aws:ec2:us-east-1:*************:subnet/subnet-0d76b32dc45c72bdc",
         "EnableDns64": false,
         "Ipv6Native": false,
         "PrivateDnsNameOptionsOnLaunch": {
@@ -92,7 +92,7 @@ slava@phobos:~$ aws ec2 create-internet-gateway
     "InternetGateway": {
         "Attachments": [],
         "InternetGatewayId": "igw-0ee92196d1aa3646c",
-        "OwnerId": "335809563306",
+        "OwnerId": "*************",
         "Tags": []
     }
 }
@@ -116,7 +116,7 @@ slava@phobos:~$ aws elbv2 create-load-balancer \
 {
     "LoadBalancers": [
         {
-            "LoadBalancerArn": "arn:aws:elasticloadbalancing:us-east-1:335809563306:loadbalancer/app/dos15-mikhalenka-loadbalancer/87615ef381ddc060",
+            "LoadBalancerArn": "arn:aws:elasticloadbalancing:us-east-1:*************:loadbalancer/app/dos15-mikhalenka-loadbalancer/87615ef381ddc060",
             "DNSName": "dos15-mikhalenka-loadbalancer-730593033.us-east-1.elb.amazonaws.com",
             "CanonicalHostedZoneId": "Z35SXDOTRQ7X7K",
             "CreatedTime": "2023-09-22T10:43:14.710000+00:00",
@@ -184,7 +184,7 @@ slava@phobos:~$ aws ec2 create-launch-template \
         "LaunchTemplateId": "lt-0181e89a7e4a474c4",
         "LaunchTemplateName": "dos-15-mikhalenka-lt",
         "CreateTime": "2023-09-22T10:53:58+00:00",
-        "CreatedBy": "arn:aws:iam::335809563306:user/DOS-15-student",
+        "CreatedBy": "arn:aws:iam::*************:user/DOS-15-student",
         "DefaultVersionNumber": 1,
         "LatestVersionNumber": 1
     }
@@ -206,7 +206,7 @@ slava@phobos:~$ aws elbv2 create-target-group \
 {
     "TargetGroups": [
         {
-            "TargetGroupArn": "arn:aws:elasticloadbalancing:us-east-1:335809563306:targetgroup/dos15-mikhalenka-target-group/946cfd10fd004eb0",
+            "TargetGroupArn": "arn:aws:elasticloadbalancing:us-east-1:*************:targetgroup/dos15-mikhalenka-target-group/946cfd10fd004eb0",
             "TargetGroupName": "dos15-mikhalenka-target-group",
             "Protocol": "HTTP",
             "Port": 80,
@@ -235,12 +235,12 @@ slava@phobos:~$ aws autoscaling put-scaling-policy \
     --adjustment-type ChangeInCapacity \
     --scaling-adjustment 1
 {
-    "PolicyARN": "arn:aws:autoscaling:us-east-1:335809563306:scalingPolicy:08eddef3-1b19-41ae-a26a-227bd80aafe6:autoScalingGroupName/dos15-mikhalenka-asg:policyName/dos15-mikhalenka-scaling-policy",
+    "PolicyARN": "arn:aws:autoscaling:us-east-1:*************:scalingPolicy:08eddef3-1b19-41ae-a26a-227bd80aafe6:autoScalingGroupName/dos15-mikhalenka-asg:policyName/dos15-mikhalenka-scaling-policy",
     "Alarms": []
 }
 ### Creation of Listener
 slava@phobos:~$ aws elbv2 create-listener \
-    --load-balancer-arn arn:aws:elasticloadbalancing:us-east-1:335809563306:loadbalancer/app/dos15-mikhalenka-loadbalancer/87615ef381ddc060 \
+    --load-balancer-arn arn:aws:elasticloadbalancing:us-east-1:*************:loadbalancer/app/dos15-mikhalenka-loadbalancer/87615ef381ddc060 \
     --protocol HTTP \
     --port 80 \
     --default-actions '[
@@ -256,8 +256,8 @@ slava@phobos:~$ aws elbv2 create-listener \
 {
     "Listeners": [
         {
-            "ListenerArn": "arn:aws:elasticloadbalancing:us-east-1:335809563306:listener/app/dos15-mikhalenka-loadbalancer/87615ef381ddc060/44386e8f1b8fb9f8",
-            "LoadBalancerArn": "arn:aws:elasticloadbalancing:us-east-1:335809563306:loadbalancer/app/dos15-mikhalenka-loadbalancer/87615ef381ddc060",
+            "ListenerArn": "arn:aws:elasticloadbalancing:us-east-1:*************:listener/app/dos15-mikhalenka-loadbalancer/87615ef381ddc060/44386e8f1b8fb9f8",
+            "LoadBalancerArn": "arn:aws:elasticloadbalancing:us-east-1:*************:loadbalancer/app/dos15-mikhalenka-loadbalancer/87615ef381ddc060",
             "Port": 80,
             "Protocol": "HTTP",
             "DefaultActions": [
@@ -275,7 +275,7 @@ slava@phobos:~$ aws elbv2 create-listener \
 }
 ### Creation of Listener Rule
 slava@phobos:~$ aws elbv2 create-rule \
-    --listener-arn arn:aws:elasticloadbalancing:us-east-1:335809563306:listener/app/dos15-mikhalenka-loadbalancer/87615ef381ddc060/44386e8f1b8fb9f8 \
+    --listener-arn arn:aws:elasticloadbalancing:us-east-1:*************:listener/app/dos15-mikhalenka-loadbalancer/87615ef381ddc060/44386e8f1b8fb9f8 \
     --priority 5 \
     --conditions '[
       {
@@ -285,11 +285,11 @@ slava@phobos:~$ aws elbv2 create-rule \
           }
       }
     ]' \
-    --actions Type=forward,TargetGroupArn=arn:aws:elasticloadbalancing:us-east-1:335809563306:targetgroup/dos15-mikhalenka-target-group/946cfd10fd004eb0
+    --actions Type=forward,TargetGroupArn=arn:aws:elasticloadbalancing:us-east-1:*************:targetgroup/dos15-mikhalenka-target-group/946cfd10fd004eb0
 {
     "Rules": [
         {
-            "RuleArn": "arn:aws:elasticloadbalancing:us-east-1:335809563306:listener-rule/app/dos15-mikhalenka-loadbalancer/87615ef381ddc060/44386e8f1b8fb9f8/686a370e065961d1",
+            "RuleArn": "arn:aws:elasticloadbalancing:us-east-1:*************:listener-rule/app/dos15-mikhalenka-loadbalancer/87615ef381ddc060/44386e8f1b8fb9f8/686a370e065961d1",
             "Priority": "5",
             "Conditions": [
                 {
@@ -307,11 +307,11 @@ slava@phobos:~$ aws elbv2 create-rule \
             "Actions": [
                 {
                     "Type": "forward",
-                    "TargetGroupArn": "arn:aws:elasticloadbalancing:us-east-1:335809563306:targetgroup/dos15-mikhalenka-target-group/946cfd10fd004eb0",
+                    "TargetGroupArn": "arn:aws:elasticloadbalancing:us-east-1:*************:targetgroup/dos15-mikhalenka-target-group/946cfd10fd004eb0",
                     "ForwardConfig": {
                         "TargetGroups": [
                             {
-                                "TargetGroupArn": "arn:aws:elasticloadbalancing:us-east-1:335809563306:targetgroup/dos15-mikhalenka-target-group/946cfd10fd004eb0",
+                                "TargetGroupArn": "arn:aws:elasticloadbalancing:us-east-1:*************:targetgroup/dos15-mikhalenka-target-group/946cfd10fd004eb0",
                                 "Weight": 1
                             }
                         ],
@@ -326,11 +326,11 @@ slava@phobos:~$ aws elbv2 create-rule \
     ]
 }
 ### Deleting a rule
-slava@phobos:~$ aws elbv2 delete-rule --rule-arn arn:aws:elasticloadbalancing:us-east-1:335809563306:listener-rule/app/dos15-mikhalenka-loadbalancer/87615ef381ddc060/44386e8f1b8fb9f8/686a370e065961d1
+slava@phobos:~$ aws elbv2 delete-rule --rule-arn arn:aws:elasticloadbalancing:us-east-1:*************:listener-rule/app/dos15-mikhalenka-loadbalancer/87615ef381ddc060/44386e8f1b8fb9f8/686a370e065961d1
 ### Deleting a listener
-slava@phobos:~$ aws elbv2 delete-listener --listener-arn arn:aws:elasticloadbalancing:us-east-1:335809563306:listener/app/dos15-mikhalenka-loadbalancer/87615ef381ddc060/44386e8f1b8fb9f8
+slava@phobos:~$ aws elbv2 delete-listener --listener-arn arn:aws:elasticloadbalancing:us-east-1:*************:listener/app/dos15-mikhalenka-loadbalancer/87615ef381ddc060/44386e8f1b8fb9f8
 ### Deleting Load Balancer
-slava@phobos:~$ aws elbv2 delete-load-balancer --load-balancer-arn arn:aws:elasticloadbalancing:us-east-1:335809563306:loadbalancer/app/dos15-mikhalenka-loadbalancer/87615ef381ddc060
+slava@phobos:~$ aws elbv2 delete-load-balancer --load-balancer-arn arn:aws:elasticloadbalancing:us-east-1:*************:loadbalancer/app/dos15-mikhalenka-loadbalancer/87615ef381ddc060
 ### Detaching Internet Gateway
 slava@phobos:~$ aws ec2 detach-internet-gateway --internet-gateway-id igw-0ee92196d1aa3646c --vpc-id vpc-01062200bc59b3189
 ### Deleting Internet Gateway
@@ -338,7 +338,7 @@ slava@phobos:~$ aws ec2 delete-internet-gateway --internet-gateway-id igw-0ee921
 ### Deleting a policy
 slava@phobos:~$ aws autoscaling delete-policy --policy-name dos15-mikhalenka-scaling-policy --auto-scaling-group-name dos15-mikhalenka-asg
 ### Deleting Target Group
-slava@phobos:~$ aws elbv2 delete-target-group --target-group-arn arn:aws:elasticloadbalancing:us-east-1:335809563306:targetgroup/dos15-mikhalenka-target-group/946cfd10fd004eb0
+slava@phobos:~$ aws elbv2 delete-target-group --target-group-arn arn:aws:elasticloadbalancing:us-east-1:*************:targetgroup/dos15-mikhalenka-target-group/946cfd10fd004eb0
 ### Deleting Launch Template
 slava@phobos:~$ aws ec2 delete-launch-template --launch-template-name dos-15-mikhalenka-lt
 {
@@ -346,7 +346,7 @@ slava@phobos:~$ aws ec2 delete-launch-template --launch-template-name dos-15-mik
         "LaunchTemplateId": "lt-0181e89a7e4a474c4",
         "LaunchTemplateName": "dos-15-mikhalenka-lt",
         "CreateTime": "2023-09-22T10:53:58+00:00",
-        "CreatedBy": "arn:aws:iam::335809563306:user/DOS-15-student",
+        "CreatedBy": "arn:aws:iam::*************:user/DOS-15-student",
         "DefaultVersionNumber": 1,
         "LatestVersionNumber": 1
     }
