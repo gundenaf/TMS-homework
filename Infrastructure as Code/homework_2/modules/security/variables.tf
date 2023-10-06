@@ -13,13 +13,23 @@ variable "vpc_id" {
   type        = string
 }
 
-variable "from_port" {
-  description = "The start port for the ingress and egress rules"
+variable "ingress_from_port" {
+  description = "The start port for ingress traffic"
   type        = number
 }
 
-variable "to_port" {
-  description = "The end port for the ingress and egress rules"
+variable "ingress_to_port" {
+  description = "The end port for ingress traffic"
+  type        = number
+}
+
+variable "egress_from_port" {
+  description = "The start port for egress traffic"
+  type        = number
+}
+
+variable "egress_to_port" {
+  description = "The end port for egress traffic"
   type        = number
 }
 

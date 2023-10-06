@@ -20,8 +20,10 @@ module "security" {
   
   vpc_id = module.network.vpc_id
 
-  from_port   = 22
-  to_port     = 57385
+  ingress_from_port   = 22
+  ingress_to_port     = 22
+  egress_from_port    = 57385
+  egress_to_port      = 57385
   protocol    = "tcp"
 
   ingress_cidr_blocks = ["0.0.0.0/0"]
