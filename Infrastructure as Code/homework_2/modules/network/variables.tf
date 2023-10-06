@@ -13,7 +13,7 @@ variable "cidr" {
 variable "az" {
   description = "The availability zone where the subnets will be created"
   type        = string
-  default     = "us-west-2a"
+  default     = "us-east-1a"
 }
 
 variable "public_subnet_cidr" {
