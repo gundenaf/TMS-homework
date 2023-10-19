@@ -2,7 +2,7 @@
 #----------------------------------------------------
 # kubectl Installation
 #----------------------------------------------------
-user@localhost:~$ sudo aptupdate && sudo apt install -y apt-transport-https
+user@localhost:~$ sudo apt update && sudo apt install -y apt-transport-https
 Hit:1 http://deb.debian.org/debian bookworm InRelease
 Hit:2 http://packages.microsoft.com/repos/code stable InRelease                                                                                                       
 Hit:3 http://security.debian.org/debian-security bookworm-security InRelease                                                                                          
