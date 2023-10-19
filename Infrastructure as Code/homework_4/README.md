@@ -2,7 +2,7 @@
 
 ## Introduction
 
-This repository contains Terraform code and configuration files for deploying a highly available web application infrastructure on Amazon Web Services (AWS). This lab is designed to demonstrate how to set up a reliable and scalable architecture for hosting web applications in the AWS cloud environment.
+This folder contains Terraform code and configuration files for deploying a highly available web application infrastructure on Amazon Web Services (AWS). This lab is designed to demonstrate how to set up a reliable and scalable architecture for hosting web applications in the AWS cloud environment.
 
 ## Modules
 
