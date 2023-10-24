@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dos-15-mikhalenka-deployment
+  namespace: dos-15-mikhalenka
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: dos-15-mikhalenka-app
+  template:
+    metadata:
+      labels:
+        app: dos-15-mikhalenka-app
+    spec:
+      containers:
+        - name: nginx
+          image: gundenaf/nginx-dos15-mikhalenka:latest
