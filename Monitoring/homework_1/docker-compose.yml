@@ -1,0 +1,62 @@
+version: '3'
+
+services:
+  prometheus:
+    build:
+      context: .
+      dockerfile: ./prometheus/Dockerfile
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./prometheus:/etc/prometheus
+    container_name: prometheus-demo
+    networks:
+      - my_network
+
+  grafana:
+    build:
+      context: .
+      dockerfile: ./grafana/Dockerfile
+    ports:
+      - "3000:3000"
+    depends_on:
+      - prometheus
+    environment:
+      GF_DASHBOARDS_DEFAULT_HOME_DASHBOARD_PATH: "/etc/grafana/provisioning/dashboards/nginx_dashboard.json"
+    volumes:
+      - ./grafana:/etc/grafana
+    container_name: grafana-demo
+    networks:
+      - my_network
+
+  nginx:
+    build:
+      context: .
+      dockerfile: ./nginx/Dockerfile
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+    container_name: nginx-demo
+    networks:
+      - my_network
+
+  nginx-exporter-demo:
+    build:
+      context: .
+      dockerfile: ./nginx-exporter/Dockerfile
+    ports:
+      - "9113:9113"
+    depends_on:
+      - prometheus
+    command:
+      - -nginx.scrape-uri
+      - http://nginx-demo:8080/stub_status
+    container_name: nginx-exporter-demo
+    networks:
+      - my_network
+
+networks:
+  my_network:
+    driver: bridge
