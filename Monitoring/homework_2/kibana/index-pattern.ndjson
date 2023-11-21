@@ -1,0 +1,12 @@
+{
+  "objects": [
+    {
+      "id": "filebeat-*",
+      "type": "index-pattern",
+      "attributes": {
+        "title": "filebeat-*",
+        "timeFieldName": "@timestamp"
+      }
+    }
+  ]
+}

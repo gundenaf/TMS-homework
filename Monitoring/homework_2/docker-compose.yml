@@ -1,0 +1,61 @@
+version: "2.4"
+
+services:
+  elasticsearch:
+    build:
+      context: ./elasticsearch
+    container_name: elasticsearch-demo
+    ports:
+      - "9200:9200"
+    volumes:
+      - elasticsearch_data:/usr/share/elasticsearch/data
+    environment:
+      - discovery.type=single-node
+
+  logstash:
+    build:
+      context: ./logstash
+    container_name: logstash-demo
+    ports:
+      - "5000:5000"
+    depends_on:
+      - elasticsearch
+
+  filebeat:
+    build:
+      context: ./filebeat
+    container_name: filebeat-demo
+    environment:
+      - ELASTICSEARCH_HOSTS=http://elasticsearch-demo:9200
+      - ELASTICSEARCH_USERNAME=elastic
+      - ELASTICSEARCH_PASSWORD=lZgjAPYnA3PJhz0bKZDY2gkJ
+    labels:
+      co.elastic.logs/enabled: "false"
+    depends_on:
+      - elasticsearch
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "2"
+    volumes:
+      - ./filebeat/logs-app:/var/log/logs-app
+
+  kibana:
+    build:
+      context: ./kibana
+    container_name: kibana-demo
+    ports:
+      - "5601:5601"
+    environment:
+      - 'ELASTICSEARCH_HOSTS=["http://elasticsearch-demo:9200"]'
+      - "SERVER_NAME=localhost"
+      - "XPACK_MONITORING_ENABLED=false"
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "2"
+
+volumes:
+  elasticsearch_data:

@@ -1,0 +1,10 @@
+filebeat.inputs:
+- type: log
+  enabled: true
+  paths:
+    - /var/log/logs-app/*.log
+
+output.elasticsearch:
+  hosts: ["http://elasticsearch-demo:9200"]
+  username: "elastic"
+  password: "lZgjAPYnA3PJhz0bKZDY2gkJ"
