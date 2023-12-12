@@ -73,7 +73,7 @@ pipeline {
                         sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP minikube delete'
                         sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP rm -rf TMS-homework'
                         sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP git clone https://github.com/gundenaf/TMS-homework.git'
-                        sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP minikube start --listen-address='0.0.0.0''
+                        sh "ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP minikube start --listen-address='0.0.0.0'"
                         sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP docker pull gundenaf/frontend:latest'
                         sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP docker pull gundenaf/backend:latest'
                         sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP docker pull gundenaf/database:latest'
@@ -82,8 +82,8 @@ pipeline {
                         sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP kubectl apply -f TMS-homework/Thesis/k8s/manifests/db-deployment.yml'
                         sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP kubectl apply -f TMS-homework/Thesis/k8s/manifests/backend-deployment.yml'
                         sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP kubectl apply -f TMS-homework/Thesis/k8s/manifests/frontend-deployment.yml'
-                        sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP kubectl port-forward service/backend-service --namespace=react-nodejs-postgresql-app 4000:4000 &'
-                        sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP kubectl port-forward service/frontend-service --namespace=react-nodejs-postgresql-app 3000:3000 &'
+                        sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP kubectl port-forward --address 0.0.0.0 service/backend-service --namespace=react-nodejs-postgresql-app 4000:4000 &'
+                        sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP kubectl port-forward --address 0.0.0.0 service/frontend-service --namespace=react-nodejs-postgresql-app 3000:3000 &'
                     }
                 }
             }
