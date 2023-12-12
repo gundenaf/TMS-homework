@@ -25,6 +25,7 @@ metadata:
   name: backend-service
   namespace: react-nodejs-postgresql-app
 spec:
+  type: NodePort
   selector:
     app: backend
   ports:
