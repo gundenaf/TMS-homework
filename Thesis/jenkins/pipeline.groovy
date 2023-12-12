@@ -4,9 +4,6 @@ pipeline {
     environment {
         DOCKERHUB_USERNAME = 'gundenaf'
         DOCKERHUB_CREDENTIALS = credentials('docker-hub-credentials-id')
-        KUBE_NAMESPACE = 'react-nodejs-postgresql-app'
-        KUBE_SERVICE_NAME_BACKEND = 'backend-service'
-        KUBE_SERVICE_NAME_FRONTEND = 'frontend-service'
     }
 
     stages {
@@ -71,39 +68,24 @@ pipeline {
         stage('Deploy to Minikube') {
             steps {
                 script {
-                    checkout([$class: 'GitSCM', 
-                              branches: [[name: '*/main']], 
-                              userRemoteConfigs: [[url: 'https://github.com/gundenaf/TMS-homework.git']]])
+                    sshagent (credentials: ['minikube-vm-id']) {
+                        sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP minikube stop'
+                        sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP minikube delete'
+                        sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP rm -rf TMS-homework'
+                        sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP git clone https://github.com/gundenaf/TMS-homework.git'
+                        sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP minikube start'
+                        sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP docker pull gundenaf/frontend:latest'
+                        sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP docker pull gundenaf/backend:latest'
+                        sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP docker pull gundenaf/database:latest'
+                        sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP kubectl apply -f TMS-homework/Thesis/k8s/namespaces/namespace.yml'
+                        sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP kubectl apply -f TMS-homework/Thesis/k8s/networks/network.yml'
+                        sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP kubectl apply -f TMS-homework/Thesis/k8s/manifests/db-deployment.yml'
+                        sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP kubectl apply -f TMS-homework/Thesis/k8s/manifests/backend-deployment.yml'
+                        sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP kubectl apply -f TMS-homework/Thesis/k8s/manifests/frontend-deployment.yml'
+                        sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP kubectl port-forward service/backend-service --namespace=react-nodejs-postgresql-app 4000:4000 &'
+                        sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP kubectl port-forward service/frontend-service --namespace=react-nodejs-postgresql-app 3000:3000 &'
+                    }
                 }
-
-                echo "sh 'cd Thesis'"
-
-                echo 'Deploying to Minikube...'
-
-                // Start Minikube
-                sh 'minikube start'
-
-                // Use Minikube context
-                sh 'kubectl config use-context minikube'
-
-                // Pull Docker images from ECR
-                sh 'eval \$(minikube docker-env)' // Set Minikube Docker environment
-                sh "docker pull $DOCKERHUB_USERNAME/frontend:latest"
-                sh "docker pull $DOCKERHUB_USERNAME/backend:latest"
-                sh "docker pull $DOCKERHUB_USERNAME/database:latest"
-
-                // Apply Kubernetes configuration
-                sh 'kubectl apply -f k8s/namespaces/namespace.yml'
-                sh 'kubectl apply -f k8s/networks/network.yml'
-                sh 'kubectl apply -f k8s/manifests/db-deployment.yml'
-                sh 'kubectl apply -f k8s/manifests/backend-deployment.yml'
-                sh 'kubectl apply -f k8s/manifests/frontend-deployment.yml'
-
-                // Port forward for backend service
-                sh "kubectl port-forward service/$KUBE_SERVICE_NAME_BACKEND --namespace=$KUBE_NAMESPACE 4000:4000 &"
-
-                // Port forward for frontend service
-                sh "kubectl port-forward service/$KUBE_SERVICE_NAME_FRONTEND --namespace=$KUBE_NAMESPACE 3000:3000 &"
             }
         }
 

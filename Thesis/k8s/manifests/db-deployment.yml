@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: postgres
-        image: gundenaf/application-db:latest
+        image: gundenaf/database:latest
         env:
         - name: POSTGRES_USER
           value: your_username

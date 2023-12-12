@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: frontend-container
-        image: gundenaf/application-frontend:latest
+        image: gundenaf/frontend:latest
         ports:
         - containerPort: 3000
 ---
