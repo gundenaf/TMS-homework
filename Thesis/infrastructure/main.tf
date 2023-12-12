@@ -2,9 +2,9 @@ module "network" {
   source                = "./modules/network"
   vpc_name              = "dos-15-mikhalenka-vpc"
   vpc_cidr              = "10.0.0.0/16"
-  availability_zone     = "us-east-1a"
-  public_subnet_cidr    = "10.0.1.0/24"
-  private_subnet_cidr   = "10.0.2.0/24"
+  availability_zones    = ["us-east-1a"]
+  public_subnet_cidrs   = ["10.0.1.0/24"]
+  private_subnet_cidrs  = ["10.0.2.0/24"]
   enable_dns_hostnames  = true
   enable_dns_support    = true
 }
@@ -55,7 +55,7 @@ module "jenkins_master" {
   name                  = "dos_15_mikhalenka_jenkins_master"
   instance_type         = "t2.micro"
   key_name              = "DOS_15_Mikhalenka"
-  subnet_id             = module.network.public_subnet_id
+  subnet_id             = element(module.network.public_subnet_ids, 0)
   security_group_id     = module.jenkins_master_sg.security_group_id
   volume_size           = 8
   volume_type           = "gp2"
@@ -69,7 +69,7 @@ module "jenkins_slave" {
   name                  = "dos_15_mikhalenka_jenkins_slave"
   instance_type         = "t2.micro"
   key_name              = "DOS_15_Mikhalenka"
-  subnet_id             = module.network.public_subnet_id
+  subnet_id             = element(module.network.public_subnet_ids, 0)
   security_group_id     = module.jenkins_slave_sg.security_group_id
   volume_size           = 8
   volume_type           = "gp2"
@@ -82,7 +82,12 @@ module "jenkins_slave" {
     sleep 5
 
     sudo yum update -y || exit 1
-    sudo amazon-linux-extras enable corretto8 || exit 1
-    sudo yum install java-1.8.0-amazon-corretto-devel || exit 1
+    sudo yum install java-17-amazon-corretto -y || exit 1
   EOF
+}
+
+module "registry" {
+  source = "./modules/registry"
+
+  ecr_repository_name     = "dos15-mikhalenka-ecr"
 }

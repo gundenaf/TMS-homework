@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  db:
+    build: ./database
+    environment:
+      POSTGRES_USER: your_username
+      POSTGRES_PASSWORD: your_password
+      POSTGRES_DB: your_database
+    networks:
+      - mynetwork
+
+  backend:
+    build: ./backend
+    ports:
+      - "4000:4000"
+    depends_on:
+      - db
+    networks:
+      - mynetwork
+
+  frontend:
+    build: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    networks:
+      - mynetwork
+
+networks:
+  mynetwork:
+    driver: bridge

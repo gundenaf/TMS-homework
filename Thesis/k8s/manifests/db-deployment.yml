@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: db
+  namespace: react-nodejs-postgresql-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+      - name: postgres
+        image: gundenaf/application-db:latest
+        env:
+        - name: POSTGRES_USER
+          value: your_username
+        - name: POSTGRES_PASSWORD
+          value: your_password
+        - name: POSTGRES_DB
+          value: your_database
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: db-service
+  namespace: react-nodejs-postgresql-app
+spec:
+  selector:
+    app: db
+  ports:
+    - protocol: TCP
+      port: 5432

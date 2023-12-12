@@ -1,14 +1,25 @@
 output "vpc_id" {
-  value       = module.network.vpc_id
-  description = "The ID of the VPC"
+  value = module.network.vpc_id
 }
 
-output "public_subnet_id" {
-  value = module.network.public_subnet_id
+output "public_subnet_ids" {
+  value = module.network.public_subnet_ids
 }
 
-output "private_subnet_id" {
-  value = module.network.private_subnet_id
+output "private_subnet_ids" {
+  value = module.network.private_subnet_ids
+}
+
+output "public_route_table_id" {
+  value = module.network.public_route_table_id
+}
+
+output "private_route_table_id" {
+  value = module.network.private_route_table_id
+}
+
+output "internet_gateway_id" {
+  value = module.network.internet_gateway_id
 }
 
 output "jenkins_master_security_group_id" {
@@ -39,4 +50,9 @@ output "jenkins_slave_instance_id" {
 output "jenkins_slave_public_ip" {
   value       = module.jenkins_slave.public_ip
   description = "The public IP address of the Jenkins Slave instance"
+}
+
+output "registry_url" {
+  value       = module.registry.registry_url
+  description = "URL of the created ECR registry"
 }

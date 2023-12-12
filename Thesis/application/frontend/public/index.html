@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>React App</title>
+</head>
+<body>
+  <div id="root"></div>
+
+  <script>
+    async function fetchData() {
+      try {
+        const response = await fetch(`/api/data`);
+        if (!response.ok) {
+          throw new Error('Failed to fetch data');
+        }
+        const { data } = await response.json();
+
+        const rootElement = document.getElementById('root');
+
+        const table = document.createElement('table');
+        table.style.width = '100%';
+
+        const thead = document.createElement('thead');
+        const headRow = document.createElement('tr');
+
+        const technologyHeader = document.createElement('th');
+        technologyHeader.textContent = 'Name';
+        headRow.appendChild(technologyHeader);
+
+        const descriptionHeader = document.createElement('th');
+        descriptionHeader.textContent = 'Description';
+        headRow.appendChild(descriptionHeader);
+
+        thead.appendChild(headRow);
+        table.appendChild(thead);
+
+        const tbody = document.createElement('tbody');
+
+        data.forEach((item) => {
+          const row = document.createElement('tr');
+
+          const technologyCell = document.createElement('td');
+          technologyCell.textContent = item.name;
+          row.appendChild(technologyCell);
+
+          const descriptionCell = document.createElement('td');
+          descriptionCell.textContent = item.description;
+          row.appendChild(descriptionCell);
+
+          tbody.appendChild(row);
+        });
+
+        table.appendChild(tbody);
+        rootElement.appendChild(table);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
+
+    // Fetch data when the page loads
+    document.addEventListener('DOMContentLoaded', fetchData);
+  </script>
+</body>
+</html>
