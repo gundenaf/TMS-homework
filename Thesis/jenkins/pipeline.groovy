@@ -73,7 +73,7 @@ pipeline {
                         sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP minikube delete'
                         sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP rm -rf TMS-homework'
                         sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP git clone https://github.com/gundenaf/TMS-homework.git'
-                        sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP minikube start'
+                        sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP minikube start --listen-address='0.0.0.0''
                         sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP docker pull gundenaf/frontend:latest'
                         sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP docker pull gundenaf/backend:latest'
                         sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP docker pull gundenaf/database:latest'

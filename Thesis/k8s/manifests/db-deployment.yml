@@ -30,7 +30,7 @@ metadata:
   name: db-service
   namespace: react-nodejs-postgresql-app
 spec:
-  type: NodePort
+  type: LoadBalancer
   selector:
     app: db
   ports:
