@@ -2,7 +2,7 @@
 
 ## Overview
 
-This thesis project focuses on implementing a DevOps pipeline using Terraform for infrastructure provisioning, Jenkins for continuous integration and continuous deployment (CI/CD), and Kubernetes (minikube) for container orchestration. The goal is to automate the deployment of a web application built with React and Node.js, which interacts with a PostgreSQL database.
+This thesis project aims to demonstrate the seamless assembly and deployment of a React + NodeJS application interacting with PostgreSQL. Leveraging Terraform on AWS, a network infrastructure was configured, comprising two EC2 instances designated for Jenkins Master and Jenkins Agent. Additionally, Security Groups were established to secure the instances. The project includes the development of a Jenkins Pipeline, orchestrating the build and deployment processes of the application into a K8s minikube cluster.
 
 ## Infrastructure
 
