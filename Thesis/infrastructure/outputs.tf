@@ -51,8 +51,3 @@ output "jenkins_slave_public_ip" {
   value       = module.jenkins_slave.public_ip
   description = "The public IP address of the Jenkins Slave instance"
 }
-
-output "registry_url" {
-  value       = module.registry.registry_url
-  description = "URL of the created ECR registry"
-}

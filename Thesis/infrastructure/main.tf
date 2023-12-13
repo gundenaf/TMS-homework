@@ -85,9 +85,3 @@ module "jenkins_slave" {
     sudo yum install java-17-amazon-corretto -y || exit 1
   EOF
 }
-
-module "registry" {
-  source = "./modules/registry"
-
-  ecr_repository_name     = "dos15-mikhalenka-ecr"
-}

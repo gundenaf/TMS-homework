@@ -2,4 +2,30 @@
 
 ## Overview
 
-This repository folder the documentation for a thesis on Junior DevOps Engineer courses. The objective of this thesis is to provide a hands-on approach to understanding and implementing key DevOps principles and practices. The primary focus is on setting up a CI/CD pipeline using Jenkins, Docker, Terraform, and deploying an application to Amazon EKS (Elastic Kubernetes Service).
+This thesis project focuses on implementing a DevOps pipeline using Terraform for infrastructure provisioning, Jenkins for continuous integration and continuous deployment (CI/CD), and Kubernetes (minikube) for container orchestration. The goal is to automate the deployment of a web application built with React and Node.js, which interacts with a PostgreSQL database.
+
+## Infrastructure
+
+The Terraform script included in this project sets up the following infrastructure components:
+
+    Virtual Private Cloud (VPC)
+    EC2 instances for Jenkins Master and Jenkins Agent
+    Security Groups to control inbound and outbound traffic for the EC2 instances
+
+## CI/CD Pipeline
+
+Jenkins is configured to manage the CI/CD process. The pipeline involves:
+
+    Source Code Management (SCM): Jenkins fetches the source code from the repository.
+    Build: The web application is built using the configured build tools and push the artifacts to DockerHub.
+    Deploy: The application is deployed to the Kubernetes cluster (minikube).
+
+## Application Stack
+
+The web application is developed using React and Node.js, providing a modern and scalable architecture. It communicates with a PostgreSQL database for data storage and retrieval.
+
+## Kubernetes
+
+The Kubernetes (K8s) configuration for minikube includes manifests for deploying the database, backend, and frontend components, along with a custom namespace and network settings.
+
+![Alt text](https://i.imgur.com/TYmDrXp.jpeg "Thesis scheme")
