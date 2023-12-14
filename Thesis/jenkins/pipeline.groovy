@@ -1,9 +1,14 @@
 pipeline {
     agent { label 'jenkins-agent' }
-
+    
     environment {
-        DOCKERHUB_USERNAME = 'gundenaf'
         DOCKERHUB_CREDENTIALS = credentials('docker-hub-credentials-id')
+    }
+    
+    parameters {
+        string(name: 'DOCKERHUB_USERNAME', description: 'DockerHub Username')
+        string(name: 'MINIKUBE_HOST', description: 'Minikube Host IP')
+        string(name: 'MINIKUBE_PORT', description: 'Minikube Host Port')
     }
 
     stages {
@@ -32,18 +37,18 @@ pipeline {
                 echo 'Building Docker images...'
 
                 // Build the Docker images for frontend, backend, and database
-                sh "sudo docker build -t $DOCKERHUB_USERNAME/frontend:latest ./frontend"
-                sh "sudo docker build -t $DOCKERHUB_USERNAME/backend:latest ./backend"
-                sh "sudo docker build -t $DOCKERHUB_USERNAME/database:latest ./database"
+                sh "sudo docker build -t ${params.DOCKERHUB_USERNAME}/frontend:latest ./frontend"
+                sh "sudo docker build -t ${params.DOCKERHUB_USERNAME}/backend:latest ./backend"
+                sh "sudo docker build -t ${params.DOCKERHUB_USERNAME}/database:latest ./database"
             }
         }
 
         stage('Post-build Tests') {
             steps {
                 echo 'Running post-build tests...'
-                sh "sudo docker inspect $DOCKERHUB_USERNAME/frontend:latest"
-                sh "sudo docker inspect $DOCKERHUB_USERNAME/backend:latest"
-                sh "sudo docker inspect $DOCKERHUB_USERNAME/database:latest"
+                sh "sudo docker inspect ${params.DOCKERHUB_USERNAME}/frontend:latest"
+                sh "sudo docker inspect ${params.DOCKERHUB_USERNAME}/backend:latest"
+                sh "sudo docker inspect ${params.DOCKERHUB_USERNAME}/database:latest"
             }
         }
 
@@ -54,13 +59,13 @@ pipeline {
                 
                 echo 'Pushing Docker images to Docker Hub...'
 
-                sh "sudo docker tag $DOCKERHUB_USERNAME/backend:latest $DOCKERHUB_USERNAME/backend:1.0.0"
-                sh "sudo docker tag $DOCKERHUB_USERNAME/frontend:latest $DOCKERHUB_USERNAME/frontend:1.0.0"
-                sh "sudo docker tag $DOCKERHUB_USERNAME/database:latest $DOCKERHUB_USERNAME/database:1.0.0"
+                sh "sudo docker tag ${params.DOCKERHUB_USERNAME}/backend:latest ${params.DOCKERHUB_USERNAME}/backend:1.0.0"
+                sh "sudo docker tag ${params.DOCKERHUB_USERNAME}/frontend:latest ${params.DOCKERHUB_USERNAME}/frontend:1.0.0"
+                sh "sudo docker tag ${params.DOCKERHUB_USERNAME}/database:latest ${params.DOCKERHUB_USERNAME}/database:1.0.0"
 
-                sh "sudo docker push $DOCKERHUB_USERNAME/backend:latest"
-                sh "sudo docker push $DOCKERHUB_USERNAME/frontend:latest"
-                sh "sudo docker push $DOCKERHUB_USERNAME/database:latest"
+                sh "sudo docker push ${params.DOCKERHUB_USERNAME}/backend:latest"
+                sh "sudo docker push ${params.DOCKERHUB_USERNAME}/frontend:latest"
+                sh "sudo docker push ${params.DOCKERHUB_USERNAME}/database:latest"
             }    
         }
 
@@ -68,22 +73,26 @@ pipeline {
         stage('Deploy to Minikube') {
             steps {
                 script {
+                    def minikubeHost = params.MINIKUBE_HOST
+                    def minikubePort = params.MINIKUBE_PORT
+                    def dockerhubUsername = params.DOCKERHUB_USERNAME
                     sshagent (credentials: ['minikube-vm-id']) {
-                        sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP minikube stop'
-                        sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP minikube delete'
-                        sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP rm -rf TMS-homework'
-                        sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP git clone https://github.com/gundenaf/TMS-homework.git'
-                        sh "ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP minikube start --listen-address='0.0.0.0'"
-                        sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP docker pull gundenaf/frontend:latest'
-                        sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP docker pull gundenaf/backend:latest'
-                        sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP docker pull gundenaf/database:latest'
-                        sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP kubectl apply -f TMS-homework/Thesis/k8s/namespaces/namespace.yml'
-                        sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP kubectl apply -f TMS-homework/Thesis/k8s/networks/network.yml'
-                        sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP kubectl apply -f TMS-homework/Thesis/k8s/manifests/db-deployment.yml'
-                        sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP kubectl apply -f TMS-homework/Thesis/k8s/manifests/backend-deployment.yml'
-                        sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP kubectl apply -f TMS-homework/Thesis/k8s/manifests/frontend-deployment.yml'
-                        sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP kubectl port-forward --address 0.0.0.0 service/backend-service --namespace=react-nodejs-postgresql-app 4000:4000 &'
-                        sh 'ssh -o StrictHostKeyChecking=no -p 47583 minikube@minikube_IP kubectl port-forward --address 0.0.0.0 service/frontend-service --namespace=react-nodejs-postgresql-app 3000:3000 &'
+                        sh "ssh -o StrictHostKeyChecking=no -p ${minikubePort} minikube@${minikubeHost} minikube stop"
+                        sh "ssh -o StrictHostKeyChecking=no -p ${minikubePort} minikube@${minikubeHost} minikube delete"
+                        sh "ssh -o StrictHostKeyChecking=no -p ${minikubePort} minikube@${minikubeHost} rm -rf TMS-homework"
+                        sh "ssh -o StrictHostKeyChecking=no -p ${minikubePort} minikube@${minikubeHost} git clone https://github.com/gundenaf/TMS-homework.git"
+                        sh "ssh -o StrictHostKeyChecking=no -p ${minikubePort} minikube@${minikubeHost} minikube start --listen-address='0.0.0.0'"
+                        sh "ssh -o StrictHostKeyChecking=no -p ${minikubePort} minikube@${minikubeHost} docker pull ${dockerhubUsername}/frontend:latest"
+                        sh "ssh -o StrictHostKeyChecking=no -p ${minikubePort} minikube@${minikubeHost} docker pull ${dockerhubUsername}/backend:latest"
+                        sh "ssh -o StrictHostKeyChecking=no -p ${minikubePort} minikube@${minikubeHost} docker pull ${dockerhubUsername}/database:latest"
+                        sh "ssh -o StrictHostKeyChecking=no -p ${minikubePort} minikube@${minikubeHost} kubectl apply -f TMS-homework/Thesis/k8s/namespaces/namespace.yml"
+                        sh "ssh -o StrictHostKeyChecking=no -p ${minikubePort} minikube@${minikubeHost} kubectl apply -f TMS-homework/Thesis/k8s/networks/network.yml"
+                        sh "ssh -o StrictHostKeyChecking=no -p ${minikubePort} minikube@${minikubeHost} kubectl apply -f TMS-homework/Thesis/k8s/manifests/db-deployment.yml"
+                        sh "ssh -o StrictHostKeyChecking=no -p ${minikubePort} minikube@${minikubeHost} kubectl apply -f TMS-homework/Thesis/k8s/manifests/backend-deployment.yml"
+                        sh "ssh -o StrictHostKeyChecking=no -p ${minikubePort} minikube@${minikubeHost} kubectl apply -f TMS-homework/Thesis/k8s/manifests/frontend-deployment.yml"
+                        sh "ssh -o StrictHostKeyChecking=no -p ${minikubePort} minikube@${minikubeHost} kubectl wait --for=condition=Ready pod --all -n react-nodejs-postgresql-app --timeout=300s"
+                        sh "ssh -o StrictHostKeyChecking=no -p ${minikubePort} minikube@${minikubeHost} 'nohup kubectl port-forward --address 0.0.0.0 service/backend-service --namespace=react-nodejs-postgresql-app 4000:4000 > /dev/null 2>&1 &'"
+                        sh "ssh -o StrictHostKeyChecking=no -p ${minikubePort} minikube@${minikubeHost} 'nohup kubectl port-forward --address 0.0.0.0 service/frontend-service --namespace=react-nodejs-postgresql-app 3000:3000 > /dev/null 2>&1 &'"
                     }
                 }
             }
